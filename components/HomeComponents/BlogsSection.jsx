@@ -1,12 +1,17 @@
 import React from 'react';
 import BlogCard from './BlogCard';
 
-const BlogsSection = () => {
+const BlogsSection = ({ blogs }) => {
+    console.log(blogs);
+
     return (
         <section>
-            <div>
-                <BlogCard />
-            </div>
+            {
+                blogs.map(blog => <BlogCard
+                    key={blog.id}
+                    singleBlog={blog}
+                />)
+            }
         </section>
     );
 };

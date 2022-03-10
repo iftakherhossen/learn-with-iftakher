@@ -1,7 +1,17 @@
 import Head from 'next/head';
 import HomeSection from '../components/HomeComponents/HomeSection';
 
-export default function Home() {
+export const getServerSideProps = async () => {
+  const res = await fetch('https://dev.to/api/articles?username=iftakher_hossen')
+  const blogs = await res.json()
+  return {
+    props: {
+      blogs,
+    }
+  }
+}
+
+export default function Home({ blogs }) {
   return (
     <div>
       <Head>
@@ -10,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HomeSection />
+      <HomeSection blogs={blogs} />
 
     </div>
   )
